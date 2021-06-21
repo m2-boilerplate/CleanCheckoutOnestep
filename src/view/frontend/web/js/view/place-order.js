@@ -52,7 +52,13 @@ define([
                 var done = shipping.setShippingInformation()
                 if (done) {
                     done.done(function () {
-                        this.getPaymentMethodComponent().placeOrder();
+                        // add support for paypal plus...
+                        var payment = this.getPaymentMethodComponent();
+                        if (payment.placePPPOrder) {
+                            payment.placePPPOrder();
+                        } else {
+                            payment.placeOrder()
+                        }
                     }.bind(this))
                 }
             }
