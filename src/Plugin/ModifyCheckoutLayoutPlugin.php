@@ -156,10 +156,15 @@ class ModifyCheckoutLayoutPlugin
             ['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['children'][0]['placeholder'] = __('Street Address');
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
             ['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['street']['children'][1]['placeholder'] = __('Street line 2');
+            if (isset($jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
+                ['payment']['children']['afterMethods']['children']['billing-address-form']['children']['form-fields']['children'])) {
+               $billingAddresssFields = $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
+                    ['payment']['children']['afterMethods']['children']['billing-address-form']['children']['form-fields']['children'];
 
-            $elements = $this->getAddressAttributes();
-            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
-            ['children']['shippingAddress']['children']['billing-address'] = $this->getCustomBillingAddressComponent($elements);
+                $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
+                ['children']['shippingAddress']['children']['billing-address'] = $this->getCustomBillingAddressComponent($billingAddresssFields);
+            }
+
 
             $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
             ['children']['shippingAddress']['children']['billing-address']['children']['form-fields']['children']['street']['children'][0]['placeholder'] = __('Street Address');
@@ -246,57 +251,7 @@ class ModifyCheckoutLayoutPlugin
                 'form-fields' => [
                     'component' => 'uiComponent',
                     'displayArea' => 'additional-fieldsets',
-                    'children' => $this->merger->merge(
-                        $elements,
-                        'checkoutProvider',
-                        'billingAddress',
-                        [
-                            'country_id' => [
-                                'sortOrder' => 115,
-                            ],
-                            'region' => [
-                                'visible' => false,
-                            ],
-                            'region_id' => [
-                                'component' => 'Magento_Ui/js/form/element/region',
-                                'config' => [
-                                    'template' => 'ui/form/field',
-                                    'elementTmpl' => 'ui/form/element/select',
-                                    'customEntry' => 'billingAddress.region',
-                                ],
-                                'validation' => [
-                                    'required-entry' => true,
-                                ],
-                                'filterBy' => [
-                                    'target' => '${ $.provider }:${ $.parentScope }.country_id',
-                                    'field' => 'country_id',
-                                ],
-                            ],
-                            'postcode' => [
-                                'component' => 'Magento_Ui/js/form/element/post-code',
-                                'validation' => [
-                                    'required-entry' => true,
-                                ],
-                            ],
-                            'company' => [
-                                'validation' => [
-                                    'min_text_length' => 0,
-                                ],
-                            ],
-                            'fax' => [
-                                'validation' => [
-                                    'min_text_length' => 0,
-                                ],
-                            ],
-                            'telephone' => [
-                                'config' => [
-                                    'tooltip' => [
-                                        'description' => __('For delivery questions.'),
-                                    ],
-                                ],
-                            ],
-                        ]
-                    ),
+                    'children' => $elements,
                 ],
             ],
         ];
@@ -333,6 +288,7 @@ class ModifyCheckoutLayoutPlugin
      */
     public function afterProcess(LayoutProcessor $layoutProcessor, $jsLayout)
     {
+
         $jsLayout = $this->changeEmailStepTemplate($jsLayout);
         $jsLayout = $this->moveSummary($jsLayout);
         $jsLayout = $this->moveDiscount($jsLayout);

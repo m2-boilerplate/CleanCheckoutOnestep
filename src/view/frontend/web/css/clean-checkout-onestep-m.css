@@ -107,7 +107,7 @@
 }
 
 .clean-checkout-onestep .fieldset.address .field .label {
-    width: 100%;
+    width: auto;
     float: none;
     margin-bottom: 5px;
     line-height: inherit;
@@ -233,3 +233,17 @@
 
 }
 
+.payment-method .actions-toolbar {
+    display: none !important;
+}
+.clean-checkout-onestep  .payment-method .payment-method-content {
+    padding-left: 0;
+    padding-bottom: 0;
+}
+.clean-checkout-onestep  .payment-method .payment-method-content > *:last-child {
+    padding-bottom: 22px;
+}
+
+.clean-checkout-onestep  .payment-method #ppplus {
+    margin-bottom: -30px;
+}

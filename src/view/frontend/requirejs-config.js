@@ -8,6 +8,7 @@ var config = {
             'Amazon_Payment/js/view/shipping': {
                 'Rubic_CleanCheckoutOnestep/js/mixin/shipping-amazon-mixin': true
             },
+
             'Magento_CheckoutAgreements/js/model/agreements-assigner': {
                 'Rubic_CleanCheckoutOnestep/js/mixin/agreements-assigner-mixin': true
             },
