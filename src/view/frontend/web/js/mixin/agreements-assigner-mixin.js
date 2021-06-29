@@ -10,7 +10,6 @@ define(['jquery'], function ($) {
     return function (target) {
         /** Override default place order action and add agreement_ids to request */
         return function (paymentData) {
-            debugger;
             var agreementForm,
                 agreementData,
                 agreementIds;

@@ -243,7 +243,6 @@
 .clean-checkout-onestep  .payment-method .payment-method-content > *:last-child {
     padding-bottom: 22px;
 }
-
-.clean-checkout-onestep  .payment-method #ppplus {
-    margin-bottom: -30px;
+.ppplus-container {
+    overflow-y: hidden;
 }
