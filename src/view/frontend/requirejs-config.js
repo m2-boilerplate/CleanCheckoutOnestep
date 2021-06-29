@@ -6,7 +6,7 @@ var config = {
     config: {
         mixins: {
             'Magento_Checkout/js/view/payment/default': {
-                'Rubic_CleanCheckoutOnestep/js/mixin/select-payment-method-mixin': true
+                'Rubic_CleanCheckoutOnestep/js/mixin/payment-default-mixin': true
             },
             'Amazon_Payment/js/view/shipping': {
                 'Rubic_CleanCheckoutOnestep/js/mixin/shipping-amazon-mixin': true
