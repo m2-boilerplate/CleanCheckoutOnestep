@@ -5,6 +5,9 @@
 var config = {
     config: {
         mixins: {
+            'Magento_Checkout/js/action/set-payment-information-extended': {
+                'Rubic_CleanCheckoutOnestep/js/mixin/set-payment-information-extended-mixin': true
+            },
             'Magento_Checkout/js/view/payment/default': {
                 'Rubic_CleanCheckoutOnestep/js/mixin/payment-default-mixin': true
             },

@@ -42,7 +42,6 @@ define([
              * @inheritDoc
              */
             setShippingInformation: function () {
-                debugger;
                 if (
                     this.validateShippingInformation()
                     &&
