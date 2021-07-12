@@ -139,7 +139,7 @@ define(
              * @returns {String}
              */
             getCode: function (parent) {
-                return _.isFunction(parent.getCode) ? parent.getCode() : 'shared';
+                return _.isFunction(parent.getCode) ? parent.getCode() : '';
             }
         });
     }

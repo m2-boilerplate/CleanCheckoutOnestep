@@ -83,7 +83,7 @@ define([
             if (source.get('params.invalid')) {
                 return false;
             }
-            var addressData = source.get('billingAddress'),
+            var addressData = source.get('billingAddressshared'),
                 newBillingAddress;
 
             if ($('#billing-save-in-address-book').is(":checked")) {
