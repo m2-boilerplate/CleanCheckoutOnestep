@@ -215,17 +215,22 @@
 .fieldset.address > .field[name="shippingAddress.firstname"],
 .fieldset.address > .field[name="shippingAddress.lastname"],
 .fieldset.address > .field[name="billingAddress.firstname"],
-.fieldset.address > .field[name="billingAddress.lastname"]{
+.fieldset.address > .field[name="billingAddress.lastname"],
+.fieldset.address > .field[name="billingAddressshared.firstname"],
+.fieldset.address > .field[name="billingAddressshared.lastname"]
+{
     width: 50%;
 }
 
 .fieldset.address > .field[name="shippingAddress.city"],
-.fieldset.address > .field[name="billingAddress.city"] {
+.fieldset.address > .field[name="billingAddress.city"],
+.fieldset.address > .field[name="billingAddressshared.city"] {
     width: 60%;
 }
 
 .fieldset.address > .field[name="shippingAddress.postcode"],
-.fieldset.address > .field[name="billingAddress.postcode"] {
+.fieldset.address > .field[name="billingAddress.postcode"],
+.fieldset.address > .field[name="billingAddressshared.postcode"]{
     width: 40%;
 }
 

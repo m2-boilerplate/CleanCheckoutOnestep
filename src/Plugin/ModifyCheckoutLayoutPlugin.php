@@ -6,7 +6,9 @@ use Magento\Checkout\Block\Checkout\AttributeMerger;
 use Magento\Checkout\Block\Checkout\LayoutProcessor;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\AttributeMetadataDataProvider;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Stdlib\ArrayManager;
+use Magento\Store\Model\ScopeInterface;
 use Magento\Ui\Component\Form\AttributeMapper;
 
 /**
@@ -44,6 +46,8 @@ class ModifyCheckoutLayoutPlugin
      */
     protected $arrayManager;
 
+    protected $scopeConfig;
+
     /**
      * @param AttributeMetadataDataProvider $attributeMetadataDataProvider
      * @param AttributeMapper $attributeMapper
@@ -56,13 +60,15 @@ class ModifyCheckoutLayoutPlugin
         AttributeMapper $attributeMapper,
         AttributeMerger $merger,
         CheckoutSession $checkoutSession,
-        ArrayManager $arrayManager
+        ArrayManager $arrayManager,
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->attributeMetadataDataProvider = $attributeMetadataDataProvider;
         $this->attributeMapper = $attributeMapper;
         $this->merger = $merger;
         $this->checkoutSession = $checkoutSession;
         $this->arrayManager = $arrayManager;
+        $this->scopeConfig = $scopeConfig;
     }
 
     /**
@@ -241,6 +247,12 @@ class ModifyCheckoutLayoutPlugin
      */
     protected function getCustomBillingAddressComponent($elements)
     {
+        $fieldOrder = $this->getFieldOrder();
+        foreach ($elements as $fieldName => $billingField) {
+            if (isset($fieldOrder[$fieldName])) {
+                $elements[$fieldName]['sortOrder'] = $fieldOrder[$fieldName];
+            }
+        }
         return [
             'component' => 'Rubic_CleanCheckoutOnestep/js/view/billing-address',
             'displayArea' => 'billing-address',
@@ -298,4 +310,10 @@ class ModifyCheckoutLayoutPlugin
         $jsLayout = $this->addPlaceOrder($jsLayout);
         return $jsLayout;
     }
+
+    private function getFieldOrder()
+    {
+        return $this->scopeConfig->getValue(\Rubic\CleanCheckout\Plugin\ModifyCheckoutLayoutPlugin::CONFIG_PATH_FIELD_ORDER_PATH, ScopeInterface::SCOPE_STORE);
+    }
+
 }
