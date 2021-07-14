@@ -23,6 +23,9 @@ var config = {
             },
             'Magento_Checkout/js/view/payment': {
                 'Rubic_CleanCheckoutOnestep/js/mixin/payment-mixin': true
+            },
+            'Rubic_CleanCheckoutTheme/js/view/email': {
+                'Rubic_CleanCheckoutOnestep/js/mixin/email-mixin': true
             }
         }
     }
