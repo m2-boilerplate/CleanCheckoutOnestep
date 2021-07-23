@@ -15,6 +15,12 @@ define([
                 ) {
                     quote.guestEmail = window.checkoutConfig.amazonLogin.amazon_customer_email;
                 }
+                this.isVisible(true);
+                this.isVisible.subscribe(function(newValue) {
+                    if (!newValue) {
+                        this.isVisible(true);
+                    }
+                }.bind(this));
             }
         });
     };
