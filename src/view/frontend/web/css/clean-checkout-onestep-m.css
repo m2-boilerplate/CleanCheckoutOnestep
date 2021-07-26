@@ -142,9 +142,12 @@
 
 .checkout-agreement .control {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .checkout-agreement-text {
     flex-grow: 1;
+    max-width: 85%;
 }
 
 .checkout-agreement .control .field-tooltip {

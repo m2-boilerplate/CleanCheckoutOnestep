@@ -6,8 +6,9 @@ define([
     'uiComponent',
     'uiRegistry',
     'Magento_Checkout/js/model/quote',
-    'Magento_Checkout/js/checkout-data'
-], function (Component, uiRegistry, quote, checkoutData) {
+    'Magento_Checkout/js/checkout-data',
+    'Magento_CheckoutAgreements/js/model/agreement-validator'
+], function (Component, uiRegistry, quote, checkoutData, agreementsValidator) {
     'use strict';
 
     return Component.extend({
@@ -46,6 +47,9 @@ define([
          * @returns {boolean}
          */
         placeOrder: function () {
+            if (!agreementsValidator.validate()) {
+                return;
+            }
             let shipping = uiRegistry.get('checkout.steps.shipping-step.shippingAddress');
             if (shipping.validateShippingInformation()) {
                 var done = shipping.setShippingInformation()

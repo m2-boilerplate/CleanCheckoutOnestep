@@ -4,40 +4,43 @@
  * See COPYING.txt for license details.
  */
 -->
-<div data-role="checkout-agreements">
-    <div class="checkout-agreements fieldset" data-bind="visible: isVisible">
-        <!-- ko foreach: agreements -->
-        <!-- ko if: ($parent.isAgreementRequired($data)) -->
-        <div class="checkout-agreement field required">
-            <div class="control">
-                <input type="checkbox" class="required-entry" form="co-payment-form"
-                       data-bind="attr: {
+<div class="payment-method _active">
+    <div data-role="checkout-agreements">
+        <div class="checkout-agreements fieldset" data-bind="visible: isVisible">
+            <!-- ko foreach: agreements -->
+            <!-- ko if: ($parent.isAgreementRequired($data)) -->
+            <div class="checkout-agreement field required">
+                <div class="control">
+                    <input type="checkbox" class="required-entry" form="co-payment-form"
+                           data-bind="attr: {
                                     'id': $parent.getCheckboxId($parentContext, agreementId),
                                     'name': 'agreement[' + agreementId + ']',
                                     'value': agreementId
                                     }"/>
-                <label class="label checkout-agreement-text" data-bind="attr: {'for': $parent.getCheckboxId($parentContext, agreementId)}">
-                    <span data-bind="html: checkboxText"></span>
-                </label>
+                    <label class="label checkout-agreement-text" data-bind="attr: {'for': $parent.getCheckboxId($parentContext, agreementId)}">
+                        <span data-bind="html: checkboxText"></span>
+                    </label>
+                    <div class="field field-tooltip">
+                        <span class="field-tooltip-action action-help" data-bind="click: function(data, event) { return $parent.showContent(data, event) }" role="button"></span>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: ($parent.isAgreementRequired($data)) -->
+            <div class="checkout-agreement field field-tooltip">
+                <div class="control">
+                    <span class="checkout-agreement-text" data-bind="html: checkboxText"></span>
+                </div>
                 <div class="field field-tooltip">
                     <span class="field-tooltip-action action-help" data-bind="click: function(data, event) { return $parent.showContent(data, event) }" role="button"></span>
-                </div>
+                </div>        </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div id="checkout-agreements-modal" data-bind="afterRender: initModal" style="display: none">
+                <div class="checkout-agreements-item-content" data-bind="html: modalContent, style: {height: contentHeight, overflow:'auto' }"></div>
             </div>
-
-        </div>
-        <!-- /ko -->
-        <!-- ko ifnot: ($parent.isAgreementRequired($data)) -->
-        <div class="checkout-agreement field field-tooltip">
-            <div class="control">
-                <span class="checkout-agreement-text" data-bind="html: checkboxText"></span>
-            </div>
-            <div class="field field-tooltip">
-                <span class="field-tooltip-action action-help" data-bind="click: function(data, event) { return $parent.showContent(data, event) }" role="button"></span>
-            </div>        </div>
-        <!-- /ko -->
-        <!-- /ko -->
-        <div id="checkout-agreements-modal" data-bind="afterRender: initModal" style="display: none">
-            <div class="checkout-agreements-item-content" data-bind="html: modalContent, style: {height: contentHeight, overflow:'auto' }"></div>
         </div>
     </div>
 </div>
+
